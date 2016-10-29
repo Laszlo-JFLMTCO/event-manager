@@ -4,6 +4,8 @@ require_relative 'filters'
 class Attendee
   include Filters
 
+  attr_reader :details
+
   def initialize(fields = [])
     @details = load_template(fields)
   end
@@ -16,17 +18,17 @@ class Attendee
     @details = template
   end
 
-  def all_details
-    @details
+  def detail(field)
+    details[rubynizer(field)]
   end
 
-  def detail(field)
-    @details[rubynizer(field)]
-    # @details[field]
+  def in_template?(field)
+    details.keys.include?(rubynizer(field))
   end
 
   def record(field, information)
-    return unless @details.keys.include?(field)
-    @details[field] = information
+    return unless in_template?(field)
+    @details[rubynizer(field)] = information
   end
+
 end

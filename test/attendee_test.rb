@@ -17,7 +17,7 @@ class AttendeeTest < Minitest::Test
   def test_initializing_no_template
     test_attendee = Attendee.new
     assert test_attendee
-    assert_equal({}, test_attendee.all_details)
+    assert_equal({}, test_attendee.details)
   end
 
   def test_initializing_with_template
@@ -25,7 +25,7 @@ class AttendeeTest < Minitest::Test
                                   "first_Name",
                                   "last_Name",
                                   "Email_Address"])
-    assert_equal({"regdate"=>nil, "first_name"=>nil, "last_name"=>nil, "email_address"=>nil}, test_attendee.all_details)
+    assert_equal({"regdate"=>nil, "first_name"=>nil, "last_name"=>nil, "email_address"=>nil}, test_attendee.details)
     assert_nil test_attendee.detail("first_name")
     assert_nil test_attendee.detail("FirST-NaME")
   end
@@ -36,7 +36,7 @@ class AttendeeTest < Minitest::Test
                                   "first_Name",
                                   "last_Name",
                                   "Email_Address"])
-    assert_equal({"regdate"=>nil, "first_name"=>nil, "last_name"=>nil, "email_address"=>nil}, test_attendee.all_details)
+    assert_equal({"regdate"=>nil, "first_name"=>nil, "last_name"=>nil, "email_address"=>nil}, test_attendee.details)
     assert_nil test_attendee.detail("first_name")
     assert_nil test_attendee.detail("FirST-NaME")
   end
@@ -50,6 +50,7 @@ class AttendeeTest < Minitest::Test
     test_input = "Testname"
     test_attendee.record("first_name", test_input)
     assert_equal test_input, test_attendee.detail("first_name")
+    test_attendee.record("FIRst_nAme", test_input)
     assert_equal test_input, test_attendee.detail("FirST-NaME")
   end
 
