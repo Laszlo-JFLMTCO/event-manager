@@ -4,6 +4,11 @@
 
 **Project requirement details:** http://tutorials.jumpstartlab.com/projects/eventmanager.html#iteration-0:-loading-a-file
 
+**Brancing strategy:** All new work is done within this branch. Only stable code is being merged to Master.
+
+**Branch: iteration-wip**
+Can have unstable code, depending on current status of work
+
 **Branch: flexible-csv**
 
 Key branch features:
