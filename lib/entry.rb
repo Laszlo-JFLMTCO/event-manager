@@ -1,7 +1,7 @@
 require 'pry'
 require_relative 'filters'
 
-class Attendee
+class Entry
   include Filters
 
   attr_reader :details

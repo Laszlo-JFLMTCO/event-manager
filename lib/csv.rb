@@ -1,5 +1,5 @@
 require 'pry'
-require_relative 'attendee'
+require_relative 'entry'
 
 class Csv
 
@@ -45,16 +45,16 @@ class Csv
   def parse_raw_content
     raw_content.map do |one_line|
       next if is_comment?(one_line)
-      attendee = Attendee.new(template)
-      capture(attendee, format(one_line))
+      entry = Entry.new(template)
+      capture(entry, format(one_line))
     end
   end
 
-  def capture(attendee, details)
+  def capture(entry, details)
     template.each_index do |index|
-      attendee.record(template[index], details[index].chomp)
+      entry.record(template[index], details[index].chomp)
     end
-    return attendee
+    return entry
   end
 
   def is_comment?(one_line)
@@ -77,16 +77,16 @@ class Csv
 
   def process_list(wishlist)
     output = []
-    list.each do |attendee|
-      output << prepare_one_line(attendee, wishlist)
+    list.each do |entry|
+      output << prepare_one_line(entry, wishlist)
     end
     return output
   end
 
-  def prepare_one_line(attendee, wishlist)
+  def prepare_one_line(entry, wishlist)
       one_line = []
       wishlist.each do |field|
-        one_line << "#{attendee.detail(field)}" if attendee.in_template?(field)
+        one_line << "#{entry.detail(field)}" if entry.in_template?(field)
       end
       return one_line.join(" ")
   end
