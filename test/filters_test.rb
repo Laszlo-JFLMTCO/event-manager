@@ -1,3 +1,6 @@
+require 'simplecov'
+SimpleCov.start
+require 'Minitest/autorun'
 require './lib/filters'
 
 class FiltersTest < Minitest::Test
